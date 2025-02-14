@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            width: 100%;
+            background: #125d83;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover, .navbar a.active {
+            text-decoration: underline;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu .profile-dropdown {
+            position: relative;
+        }
+
+        .menu .profile-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            color: black;
+            min-width: 120px;
+            right: 0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            color: black;
+        }
+
+        .dropdown-content a:hover {
+            background: #f1f1f1;
+        }
+/* Services Dropdown */
+.services-dropdown {
+            position: relative;
+        }
+
+        .services-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            color: black;
+            min-width: 120px;
+            right: 0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 999;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            color: black;
+        }
+
+        .dropdown-content a:hover {
+            background: #f1f1f1;
+        }
+        /* Quick Connect (Website Name) */
+        .quick-connect {
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Mobile-Friendly Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #007bff;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                text-align: center;
+            }
+
+            .menu a {
+                padding: 10px;
+                display: block;
+                width: 100%;
+            }
+
+            .menu.show {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Image Container */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 60vh; /* Small height */
+            overflow: hidden;
+        }
+
+        .quote-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Keeps aspect ratio while filling width */
+        }
+
+        .quote-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .quote-text {
+                font-size: 18px;
+                padding: 8px;
+            }
+        }
+         /* Services Section */
+         .services {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .services h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .service-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .service {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .service img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .service h3 {
+            margin: 15px 0 10px;
+        }
+        
+
+        /* How It Works Section */
+        .how-it-works {
+            text-align: center;
+            padding: 40px;
+            background-color: rgb(0, 100, 139);
+            color: white;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .step {
+            background: white;
+            color: #0d0d0d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+/* Features Section */
+.features {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            gap: 30px;
+            padding: 50px 20px;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 30%;
+        }
+
+        .feature img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: #125d83;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .quote-text, .quote-image {
+                width: 100%;
+            }
+
+            .features {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .feature {
+                width: 100%;
+            }
+        }
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="#" class="quick-connect">Quick Connect</a> <!-- Website Name on Left -->
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <div class="profile-dropdown">
+                <a href="#">Profile ▼</a>
+                <div class="dropdown-content">
+                    <a href="#">View Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+            <a href="#">About</a>
+           <!-- Services Dropdown -->
+           <div class="services-dropdown">
+            <a href="#">Services ▼</a>
+            <div class="dropdown-content">
+                <a href="#">Electronics Repairs</a>
+                <a href="#">Electrical Repairs</a>
+                <a href="#">Vehicle Repairs</a>
+            </div>
+        </div>
+            <a href="#">Contact Us</a>
+            <a href="#">Login</a>
+        </div>
+    </div>
+
+    <!-- Image Section -->
+    <div class="container">
+        <img src="https://www.obrienrealestate.com.au/wp-content/uploads/2021/09/property-maintenance-checklist.png" 
+             alt="Repair Image" class="quote-image">
+        <div class="quote-text">
+            Get Instant Help, Anywhere, Anytime!<br>
+          We ensure you a Fast, reliable repairs to get you back on track
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.menu').classList.toggle('show');
+        }
+    </script>
+     <!-- Services Section -->
+     <section class="services"><br>
+        <h2>Our Services</h2><br><br>
+        <div class="service-container">
+            <div class="service">
+                <img src="https://thumbs.dreamstime.com/z/electronic-service-repair-icon-vector-illustration-design-template-200841980.jpg" alt="Electronics Repair">
+                <h3>Electronics Repairs</h3>
+                <p>Mobile Phones, Laptops, Home Appliances</p>
+            </div>
+            <div class="service">
+                <img src="https://tse2.mm.bing.net/th?id=OIP.XfdGkzMsoMlZTvGCVEx4ygHaH5&pid=Api&P=0&h=180" alt="Electrical Repair" height=10 width=10 >
+                <h3>Electrical Repairs</h3>
+                <p>Wiring, HVAC, Circuit Breakers</p>
+            </div>
+            <div class="service">
+                <img src="https://tse4.mm.bing.net/th?id=OIP.RJxvAXPaUmmdUtQTWaD6IQHaHa&pid=Api&P=0&h=180" alt="Vehicle Repair">
+                <h3>Vehicle Repairs</h3>
+                <p>Breakdown Assistance, Lockout Services, Fuel Supply</p>
+            </div>
+        </div><br><br><br><br>
+        <h2 style="text-align: center;">Special Features</h2>
+    </section>
+      <!-- Features Section -->
+      <div class="features">
+        <div class="feature">
+            <img src="https://cdn-icons-png.flaticon.com/512/2910/2910793.png" alt="Quick Response">
+            <h3>Quick Response</h3>
+            <p>Get immediate assistance from skilled professionals in your area.</p>
+        </div>
+        <div class="feature">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png" alt="Verified Providers">
+            <h3>Verified Providers</h3>
+            <p>All service providers are thoroughly checked for reliability and trust.</p>
+        </div>
+        <div class="feature">
+            <img src="https://cdn-icons-png.flaticon.com/512/3456/3456426.png" alt="Local Experts">
+            <h3>Local Experts</h3>
+            <p>Find nearby professionals who understand your needs best.</p>
+        </div>
+    </div>
+</div>
+
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2>How It Works</h2><br>
+        <div class="steps">
+            <div class="step">1. Select Your Service</div>
+            <div class="step">2. Describe the Issue</div>
+            <div class="step">3. Get Matched with a Technician</div>
+            <div class="step">4. Track & Complete the Repair</div>
+            <div class="step">5. Feedback and Review </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 QuickFix Hub. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
